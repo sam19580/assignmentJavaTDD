@@ -38,5 +38,26 @@ public class CalculatorTest {
     public void addFunctionShouldReturnSumForCustomDelimiter(){
         assertEquals(10,calculator.add("//;\n1;2;3;4"));
     }
-    
+    @Test
+    public void testNegativeNumberThrowsExceptionForSingleNumber() {
+        Calculator calc = new Calculator();
+
+        try {
+            calc.add("1,-2,3");
+            fail("Expected IllegalArgumentException for negative numbers");
+        } catch (IllegalArgumentException ex) {
+            assertEquals("negative numbers not allowed -2", ex.getMessage());
+        }
+    }
+    @Test
+    public void testNegativeNumberThrowsExceptionForMultipleNumbers() {
+        Calculator calc = new Calculator();
+
+        try {
+            calc.add("1,-2,-3,3");
+            fail("Expected IllegalArgumentException for negative numbers");
+        } catch (IllegalArgumentException ex) {
+            assertEquals("negative numbers not allowed -2, -3", ex.getMessage());
+        }
+    }
 }

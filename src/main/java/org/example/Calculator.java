@@ -1,7 +1,6 @@
 package org.example;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Calculator {
@@ -11,13 +10,33 @@ public class Calculator {
     public static int CalculateSum(List<Integer> nums) {
         int sum = 0;
         ArrayList<Integer> negativeNos = new ArrayList<>();
+
         for (Integer num : nums) {
+            if (num < 0) {
+                negativeNos.add(num);
+            } else {
                 sum += num;
+            }
         }
 
-        return sum;
-        }
+        if (negativeNos.isEmpty()) {
+            return sum;
+        } else {
+            // Format negative numbers into a string
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < negativeNos.size(); i++) {
+                sb.append(negativeNos.get(i));
+                if (i < negativeNos.size() - 1) {
+                    sb.append(", ");
+                }
+            }
 
+            String message = "negative numbers not allowed " + sb.toString();
+            System.out.println("string");
+            System.out.println(message);
+            throw new IllegalArgumentException(message);
+        }
+    }
 
 
     public int add(String numbers) {
@@ -49,9 +68,11 @@ public class Calculator {
         else {
             int num = Integer.valueOf(numbers);
 
-            return CalculateSum(Collections.singletonList(num));
+            if (num < 0) {
+                throw new IllegalArgumentException("negative numbers not allowed " + num);
+            }
 
-
+            return num;
         }
     }
     private String getDelimiter(String numbers) {
