@@ -11,7 +11,7 @@ public class Calculator {
             return 0;
         } else if (numbers.contains(",")) {
             int sum = 0;
-            String[] nums = numbers.split(",");
+            String[] nums = numbers.split(",|\n");
             ArrayList<Integer> nos = new ArrayList<>();
             for (String value : nums) {
                 nos.add(Integer.valueOf(value));
